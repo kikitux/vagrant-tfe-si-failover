@@ -26,6 +26,9 @@ cat > /etc/settings.json <<EOF
     },
     "enc_password": {
         "value": "Password1#"
+    },
+    "generated_postgres_password": {
+        "value": "Password1#"        
     }
 }
 EOF

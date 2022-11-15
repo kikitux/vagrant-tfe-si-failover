@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
         vm1.vm.provision "shell", path: "scripts/download_uninstall.sh"
         vm1.vm.provision "shell", path: "scripts/config_replicated.sh"
         vm1.vm.provision "shell", path: "scripts/install_tfe.sh"
+        vm1.vm.provision "shell", path: "scripts/run_replicated_db_backup.sh"
         vm1.vm.provision "shell", path: "scripts/initial_user_tfe.sh"
     end
 
