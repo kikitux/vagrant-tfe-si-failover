@@ -4,8 +4,8 @@
 
 ## pre-req
 
-- virtualbox
-- vagrant
+- virtualbox ( tested with latest 7 )
+- vagrant ( use vagrant 2.3.3 or higher on new macos with Virtualbox )
 - copy `license.rli` to this folder
 
 ## How this works
