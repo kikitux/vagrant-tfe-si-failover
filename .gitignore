@@ -1,7 +1,7 @@
 *.rli
 *.vdi
 *.log
+*.tar
 .vagrant/
+cache/
 terraform.tfstate
-
-

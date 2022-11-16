@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
     config.vm.box = "hashicorp/bionic64"
     config.vm.network "private_network", type: "dhcp"
       
+    config.vm.synced_folder "cache", "/var/cache/apt/archives/", create: true, owner: "_apt", group: "root", mount_options: ["dmode=777,fmode=666"]
+
     #variables
     give_info=true
     port=2
@@ -35,7 +37,9 @@ Vagrant.configure("2") do |config|
         vm1.vm.provision "shell", path: "scripts/install_terraform.sh"
         vm1.vm.provision "shell", path: "scripts/download_uninstall.sh"
         vm1.vm.provision "shell", path: "scripts/config_replicated.sh"
+        vm1.vm.provision "shell", path: "scripts/run_docker_load.sh" # we install docker, and load previous downloaded images
         vm1.vm.provision "shell", path: "scripts/install_tfe.sh"
+        vm1.vm.provision "shell", path: "scripts/run_docker_save.sh" # we save downloaded images
         vm1.vm.provision "shell", path: "scripts/run_replicated_db_backup.sh"
         vm1.vm.provision "shell", path: "scripts/initial_user_tfe.sh"
     end
