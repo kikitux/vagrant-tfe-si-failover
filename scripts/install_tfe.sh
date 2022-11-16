@@ -16,8 +16,8 @@ bash ./install.sh \
 
 while ! curl -kLsfS --connect-timeout 5 http://${LOCALURL} &>/dev/null ; do
   echo "INFO: TFE has not been yet fully started"
-  echo "INFO: sleeping 60 seconds"
-  sleep 60
+  echo "INFO: sleeping 90 seconds"
+  sleep 90
 done
 
 echo "INFO: TFE is up and running"
