@@ -19,7 +19,8 @@ To be able to mount the same mounted disk on a different TFE, we need to seed th
     }
 ```
 
-In this example, we seed the same value to the original TFE, so is a known value for our lab.
+In this example, ![we seed the same value to the original TFE](https://github.com/kikitux/vagrant-tfe-si-failover/blob/94c2d5d30c8d675bddd081dd251196590f481b78/scripts/config_replicated.sh#L30-L32), so is a known value for our lab.
+
 
 
 ## How to use
