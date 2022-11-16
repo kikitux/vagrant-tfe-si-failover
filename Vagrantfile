@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "vm2" , autostart: false do |vm2|
-        vm2.vm.hostname = "tfe1"
+        vm2.vm.hostname = "tfe2"
 
         vm2.vm.provider "virtualbox" do |v|     
             v.memory = 1024 * 4
