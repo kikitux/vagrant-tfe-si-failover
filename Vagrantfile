@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.box = "hashicorp/bionic64"
-    config.vm.network "public_network" 
+    config.vm.network "private_network", type: "dhcp"
       
     #variables
     give_info=true
@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
         vm1.vm.provision "shell", path: "scripts/download_uninstall.sh"
         vm1.vm.provision "shell", path: "scripts/config_replicated.sh"
         vm1.vm.provision "shell", path: "scripts/install_tfe.sh"
+        vm1.vm.provision "shell", path: "scripts/run_replicated_db_backup.sh"
         vm1.vm.provision "shell", path: "scripts/initial_user_tfe.sh"
     end
 
