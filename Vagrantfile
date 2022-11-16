@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.box = "hashicorp/bionic64"
-    config.vm.network "public_network" 
+    config.vm.network "private_network", type: "dhcp"
       
     #variables
     give_info=true
