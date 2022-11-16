@@ -7,6 +7,6 @@ which docker 2>/dev/null || {
   apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 }
 
-if [ -f /vagrant/dockersimages.tar ] ; then
-  docker load -i /vagrant/dockersimages.tar
+if [ -f /vagrant/dockerimages.tar ] ; then
+  docker load -i /vagrant/dockerimages.tar
 fi
