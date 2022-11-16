@@ -1,5 +1,7 @@
 #
 
+![diagram](https://raw.githubusercontent.com/kikitux/vagrant-tfe-si-failover/main/diagram/diagram.png)
+
 ## pre-req
 
 - copy `license.rli` to this folder
