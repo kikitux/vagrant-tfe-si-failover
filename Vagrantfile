@@ -1,5 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
+
+puts "warn: you need license.rli file" if !File.exist?("license.rli")
 
 Vagrant.configure("2") do |config|
     config.vm.box = "hashicorp/bionic64"
