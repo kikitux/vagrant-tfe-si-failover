@@ -37,6 +37,12 @@ git clone https://github.com/kikitux/vagrant-tfe-si-failover
 cd vagrant-tfe-si-failover
 ```
 
+- copy `license.rli`
+
+```
+cp <path>/license.rli license.rli
+```
+
 ### Passwords
 
 all the passwords used here are `Password1#`
