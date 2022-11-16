@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
 images=`docker images -q`
-[ "$images" ] && docker save $images -o /vagrant/dockerimages.tar
+if [ "$images" ] ; then
+  echo INFO: we will save the docker images to dockerimages.tar
+  docker save $images -o /vagrant/dockerimages.tar
+fi

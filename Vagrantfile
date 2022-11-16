@@ -10,9 +10,20 @@ Vagrant.configure("2") do |config|
       
     config.vm.synced_folder "cache", "/var/cache/apt/archives/", create: true, owner: "_apt", group: "root", mount_options: ["dmode=777,fmode=666"]
 
-    #variables
-    give_info=true
-    port=2
+    # user variable
+    release = 0
+
+    # https://developer.hashicorp.com/terraform/enterprise/releases
+    # latest 0
+    #
+    # v202211-1	660
+    # v202210-1	659
+    # v202209-2	655
+    # v202209-1	654
+
+    # internal variables
+    give_info = true
+    port = 2
     disk = "tfe"
 
     config.vm.define "vm1" , autostart: true do |vm1|
@@ -36,7 +47,7 @@ Vagrant.configure("2") do |config|
         vm1.vm.provision "shell", path: "scripts/install_tools.sh"
         vm1.vm.provision "shell", path: "scripts/install_terraform.sh"
         vm1.vm.provision "shell", path: "scripts/download_uninstall.sh"
-        vm1.vm.provision "shell", path: "scripts/config_replicated.sh"
+        vm1.vm.provision "shell", path: "scripts/config_replicated.sh", env: { "RELEASE" => release||=String.new }
         vm1.vm.provision "shell", path: "scripts/run_docker_load.sh" # we install docker, and load previous downloaded images
         vm1.vm.provision "shell", path: "scripts/install_tfe.sh"
         vm1.vm.provision "shell", path: "scripts/run_docker_save.sh" # we save downloaded images
@@ -66,7 +77,8 @@ Vagrant.configure("2") do |config|
         vm2.vm.provision "shell", path: "scripts/install_tools.sh"
         vm2.vm.provision "shell", path: "scripts/install_terraform.sh"
         vm2.vm.provision "shell", path: "scripts/download_uninstall.sh"
-        vm2.vm.provision "shell", path: "scripts/config_replicated.sh"
+        vm2.vm.provision "shell", path: "scripts/config_replicated.sh", env: { "RELEASE" => release||=String.new }
+        vm2.vm.provision "shell", path: "scripts/run_docker_load.sh" # we install docker, and load previous downloaded images
         vm2.vm.provision "shell", path: "scripts/install_tfe.sh"
     end
 

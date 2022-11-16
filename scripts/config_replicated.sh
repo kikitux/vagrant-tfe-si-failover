@@ -3,6 +3,9 @@
 LOCALIP=`hostname -I | xargs -n1 | grep 192.168`
 LOCALURL=${LOCALIP}.nip.io
 
+# default to 0
+RELEASE=${RELEASE:-0}
+
 cat > /etc/replicated.conf <<EOF
 {
   "BypassPreflightChecks": true,
@@ -10,7 +13,7 @@ cat > /etc/replicated.conf <<EOF
   "DaemonAuthenticationPassword": "Password1#",
   "ImportSettingsFrom": "/etc/settings.json",
   "LicenseFileLocation": "/vagrant/license.rli",
-  "ReleaseSequence": 0,
+  "ReleaseSequence": ${RELEASE},
   "TlsBootstrapType": "self-signed",
   "TlsBootstrapHostname": "${LOCALURL}"
 }
