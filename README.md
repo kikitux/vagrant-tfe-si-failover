@@ -8,6 +8,23 @@
 
 ## How to use
 
+- clone
+
+```
+git clone https://github.com/kikitux/vagrant-tfe-si-failover
+```
+
+- change directory
+
+```
+cd vagrant-tfe-si-failover
+```
+
+### Passwords
+
+all the passwords used here are `Password1#`
+
+
 ### Scenario 1, same VM
 
 -
