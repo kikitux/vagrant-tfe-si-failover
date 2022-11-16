@@ -4,7 +4,23 @@
 
 ## pre-req
 
+- virtualbox
+- vagrant
 - copy `license.rli` to this folder
+
+## How this works
+
+On mounted disk installation, replicated will generate a database password for internal user `hashicorp`.
+To be able to mount the same mounted disk on a different TFE, we need to seed this password to replicated
+
+```
+    "generated_postgres_password": {
+        "value": "Password1#"        
+    }
+```
+
+In this example, we seed the same value to the original TFE, so is a known value for our lab.
+
 
 ## How to use
 
