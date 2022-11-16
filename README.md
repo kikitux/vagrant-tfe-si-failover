@@ -8,7 +8,15 @@
 - vagrant ( use vagrant 2.3.3 or higher on new macos with Virtualbox )
 - copy `license.rli` to this folder
 
-## How this works
+## What this does?
+
+This is a simple lab for TFE that install Terraform Enterprise on vm1 as mounted disk.
+And allow test the 2 scenarios of recovery.
+
+- reinstall on same vm
+- failover to a new vm with a copy of `mounted disk`
+
+## How this works?
 
 On mounted disk installation, replicated will generate a database password for internal user `hashicorp`.
 To be able to mount the same mounted disk on a different TFE, we need to seed this password to replicated
@@ -18,6 +26,10 @@ To be able to mount the same mounted disk on a different TFE, we need to seed th
         "value": "Password1#"        
     }
 ```
+
+When `vm1` is started, we use Virtualbox to create a mounted disk
+
+When `vm2` is started, we use Virtualbox clone medium to duplicate the mounted disk from `vm1`
 
 In this example, [we seed the same value to the original TFE](https://github.com/kikitux/vagrant-tfe-si-failover/blob/94c2d5d30c8d675bddd081dd251196590f481b78/scripts/config_replicated.sh#L30-L32), so is a known value for our lab.
 
