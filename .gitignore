@@ -1,5 +1,7 @@
 *.rli
 *.vdi
+*.log
 .vagrant/
 terraform.tfstate
+
 

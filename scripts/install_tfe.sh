@@ -9,7 +9,7 @@ curl -o install.sh https://install.terraform.io/ptfe/stable
 bash ./install.sh \
   no-proxy \
   private-address=${LOCALIP} \
-  public-address=${LOCALIP}
+  public-address=${LOCALIP} | tee /vagrant/install_tfe_${HOSTNAME}.log
 
 # Once the installer finishes, you may poll the /_health_check endpoint until a 200 is returned by the application, 
 # indicating that it is fully started
