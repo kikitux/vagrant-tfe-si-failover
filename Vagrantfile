@@ -14,12 +14,12 @@ Vagrant.configure("2") do |config|
     release = 0
 
     # https://developer.hashicorp.com/terraform/enterprise/releases
-    # latest 0
+    # latest    0
     #
-    # v202211-1	660
-    # v202210-1	659
-    # v202209-2	655
-    # v202209-1	654
+    # v202211-1 660
+    # v202210-1 659
+    # v202209-2 655
+    # v202209-1 654
 
     # internal variables
     give_info = true
@@ -32,19 +32,20 @@ Vagrant.configure("2") do |config|
         vm1.vm.provider "virtualbox" do |v|     
             v.memory = 1024 * 4
             v.cpus = 2
-            localdisk="#{disk}1"
-            if !File.exist?("#{localdisk}.vdi")
+            localdisk="#{disk}1.vdi"
+            if !File.exist?("#{localdisk}")
                 unless give_info==false
                     puts "info: on first boot disk will be created"
                     give_info=false
                 end
-                v.customize ['createhd', '--filename', "#{localdisk}.vdi", '--size', (50 * 1024).floor]
+                v.customize ['createhd', '--filename', "#{localdisk}", '--size', (50 * 1024).floor]
             end
-            v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', port, '--device', 0, '--type', 'hdd', '--medium', "#{localdisk}.vdi"]
+            v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', port, '--device', 0, '--type', 'hdd', '--medium', "#{localdisk}"]
         end
 
         vm1.vm.provision "shell", path: "scripts/config_mount_disk.sh", run: "always"
         vm1.vm.provision "shell", path: "scripts/install_tools.sh"
+        vm1.vm.provision "shell", path: "scripts/install_netdata.sh"
         vm1.vm.provision "shell", path: "scripts/install_terraform.sh"
         vm1.vm.provision "shell", path: "scripts/download_uninstall.sh"
         vm1.vm.provision "shell", path: "scripts/config_replicated.sh", env: { "RELEASE" => release||=String.new }
@@ -61,20 +62,21 @@ Vagrant.configure("2") do |config|
         vm2.vm.provider "virtualbox" do |v|     
             v.memory = 1024 * 4
             v.cpus = 2
-            remotedisk="#{disk}1"
-            localdisk="#{disk}2"
-            if !File.exist?("#{localdisk}.vdi")
+            remotedisk="#{disk}1.vdi"
+            localdisk="#{disk}2.vdi"
+            if !File.exist?("#{localdisk}")
                 unless give_info==false
                     puts "info: on first boot disk will be created"
                     give_info=false
                 end
-                v.customize ['clonemedium', "#{remotedisk}.vdi", "#{localdisk}.vdi"]
+                v.customize ['clonemedium', "#{remotedisk}", "#{localdisk}"]
             end
-            v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', port, '--device', 0, '--type', 'hdd', '--medium', "#{localdisk}.vdi"]
+            v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', port, '--device', 0, '--type', 'hdd', '--medium', "#{localdisk}"]
         end
 
         vm2.vm.provision "shell", path: "scripts/config_mount_disk.sh", run: "always"
         vm2.vm.provision "shell", path: "scripts/install_tools.sh"
+        vm2.vm.provision "shell", path: "scripts/install_netdata.sh"
         vm2.vm.provision "shell", path: "scripts/install_terraform.sh"
         vm2.vm.provision "shell", path: "scripts/download_uninstall.sh"
         vm2.vm.provision "shell", path: "scripts/config_replicated.sh", env: { "RELEASE" => release||=String.new }
